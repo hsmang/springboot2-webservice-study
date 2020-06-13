@@ -1,5 +1,6 @@
 package com.java.study.web;
 
+import com.java.study.config.auth.dto.SessionUser;
 import com.java.study.domain.posts.PostsResponseDto;
 import com.java.study.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -9,15 +10,22 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession session;
 
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts", postsService.findAllDesc());
+        SessionUser user = (SessionUser) session.getAttribute("user");
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
