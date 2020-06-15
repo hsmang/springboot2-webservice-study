@@ -3,3 +3,5 @@
 .gradle
 .idea
 application-oauth.yml
+application-oauthtest.yml
+application-oauth.properties
