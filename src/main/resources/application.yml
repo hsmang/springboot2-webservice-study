@@ -9,3 +9,12 @@ spring:
   h2:
     console:
       enabled: true
+  session:
+    store-type: jdbc
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: debug

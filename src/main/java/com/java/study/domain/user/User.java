@@ -4,12 +4,14 @@ import com.java.study.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@ToString
 public class User extends BaseTimeEntity {
 
     @Id
