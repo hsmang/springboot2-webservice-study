@@ -5,6 +5,8 @@ import com.java.study.config.auth.dto.SessionUser;
 import com.java.study.domain.posts.PostsResponseDto;
 import com.java.study.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +23,8 @@ public class IndexController {
     private final HttpSession session;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String index(Model model, @LoginUser SessionUser user, @PageableDefault Pageable pageable){
+        model.addAttribute("posts", postsService.findPostsList(pageable));
         if(user != null){
             System.out.println(" >>> : " + user);
             model.addAttribute("user", user);
